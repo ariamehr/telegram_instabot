@@ -15,7 +15,7 @@ A powerful Telegram bot to interact with Instagram — fetch profile information
 1. Clone the repo:
 
    ```bash
-   git clone https://github.com/<your-username>/telegram-instabot.git
+   git clone https://github.com/ariamehr/telegram-instabot.git
    cd telegram-instabot
    ```
 
