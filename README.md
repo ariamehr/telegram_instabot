@@ -9,6 +9,7 @@ A powerful Telegram bot to interact with Instagram — fetch profile information
 - **/download_posts `<username>`**: Download the latest 5 posts of a public account.
 - **/download_stories**: Download all current stories of the users you follow.
 - **Rate limiting & sessions**: Built on [Instaloader](https://instaloader.github.io/) with automatic throttling and session caching.
+- **Web API**: Access the same features through a FastAPI server.
 
 ## 🔧 Installation
 
@@ -44,6 +45,12 @@ A powerful Telegram bot to interact with Instagram — fetch profile information
 
    ```bash
    python bot.py
+   ```
+
+6. Launch the optional web interface:
+
+   ```bash
+   uvicorn web_app:app --reload
    ```
 
 ## ⚙️ Configuration (`config.py`)

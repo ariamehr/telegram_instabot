@@ -1,6 +1,8 @@
 aiogram==3.0.0b7
 instaloader==4.11
 python-dotenv==1.0.0
+fastapi==0.111.0
+uvicorn==0.29.0
 
 # Development dependencies
 pytest==8.3.5
