@@ -9,7 +9,7 @@ A powerful Telegram bot to interact with Instagram — fetch profile information
 - **/download_posts `<username>`**: Download the latest 5 posts of a public account.
 - **/download_stories**: Download all current stories of the users you follow.
 - **Rate limiting & sessions**: Built on [Instaloader](https://instaloader.github.io/) with automatic throttling and session caching.
-- **Web API**: Access the same features through a FastAPI server.
+- **Web API**: Access the same features through a FastAPI server, served over HTTPS.
 
 ## 🔧 Installation
 
@@ -39,6 +39,9 @@ A powerful Telegram bot to interact with Instagram — fetch profile information
    TELEGRAM_TOKEN=your_telegram_bot_token_here
    INSTAGRAM_USER=your_instagram_username
    INSTAGRAM_PASSWORD=your_instagram_password
+   # Optional: paths to SSL certificate and key for HTTPS
+   SSL_CERTFILE=/path/to/cert.pem
+   SSL_KEYFILE=/path/to/key.pem
    ```
 
 5. Run the bot:
@@ -50,7 +53,8 @@ A powerful Telegram bot to interact with Instagram — fetch profile information
 6. Launch the optional web interface:
 
    ```bash
-   uvicorn web_app:app --reload
+   uvicorn web_app:app --reload \
+       --ssl-keyfile "$SSL_KEYFILE" --ssl-certfile "$SSL_CERTFILE"
    ```
 
 ## ⚙️ Configuration (`config.py`)
@@ -65,6 +69,8 @@ TELEGRAM_TOKEN = os.getenv("TELEGRAM_TOKEN")  # Telegram Bot API token
 INSTAGRAM_USER = os.getenv("INSTAGRAM_USER")  # Instagram username for login
 INSTAGRAM_PASSWORD = os.getenv("INSTAGRAM_PASSWORD")  # Instagram password for login
 SESSION_DIR = os.getenv("SESSION_DIR", "sessions")  # directory for Instaloader sessions
+SSL_CERTFILE = os.getenv("SSL_CERTFILE")  # path to SSL certificate
+SSL_KEYFILE = os.getenv("SSL_KEYFILE")  # path to SSL key
 ```
 
 ## 📜 Usage
