@@ -60,17 +60,13 @@ async def cmd_start(message: types.Message):
     keyboard.button(text="/download_stories")
     keyboard.adjust(1)
     await message.reply(
-        "👋 Welcome to *InstaDownloader Bot*!
-"
-        "Use the following commands:
-"
-        "- /profile `<username>`
-"
-        "- /download_posts `<username>`
-"
+        "👋 Welcome to *InstaDownloader Bot!*\n"
+        "Use the following commands:\n"
+        "- /profile `<username>`\n"
+        "- /download_posts `<username>`\n"
         "- /download_stories",
         parse_mode="Markdown",
-        reply_markup=keyboard.as_markup(resize_keyboard=True)
+        reply_markup=keyboard.as_markup(resize_keyboard=True),
     )
 
 @dp.message(Command("profile"))
@@ -83,12 +79,9 @@ async def cmd_profile(message: types.Message):
     try:
         profile = await asyncio.to_thread(Profile.from_username, L.context, username)
         caption = (
-            f"👤 *{profile.username}*
-"
-            f"🔖 Full Name: {profile.full_name}
-"
-            f"👥 Followers: {profile.followers}
-"
+            f"👤 *{profile.username}*\n"
+            f"🔖 Full Name: {profile.full_name}\n"
+            f"👥 Followers: {profile.followers}\n"
             f"🔗 https://instagram.com/{profile.username}"
         )
         await message.reply_photo(profile.profile_pic_url, caption=caption, parse_mode="Markdown")
