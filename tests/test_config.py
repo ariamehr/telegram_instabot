@@ -13,6 +13,8 @@ def test_loads_env_variables(monkeypatch):
     monkeypatch.setenv("INSTAGRAM_USER", "user123")
     monkeypatch.setenv("INSTAGRAM_PASSWORD", "pass123")
     monkeypatch.setenv("SESSION_DIR", "my_sessions")
+    monkeypatch.setenv("SSL_CERTFILE", "/tmp/cert.pem")
+    monkeypatch.setenv("SSL_KEYFILE", "/tmp/key.pem")
 
     # Reload config after setting env vars and stubbing dotenv
     config = importlib.import_module("config")
@@ -22,3 +24,5 @@ def test_loads_env_variables(monkeypatch):
     assert config.INSTAGRAM_USER == "user123"
     assert config.INSTAGRAM_PASSWORD == "pass123"
     assert config.SESSION_DIR == "my_sessions"
+    assert config.SSL_CERTFILE == "/tmp/cert.pem"
+    assert config.SSL_KEYFILE == "/tmp/key.pem"

@@ -1,14 +1,20 @@
 import asyncio
+import os
 from pathlib import Path
 
 from fastapi import FastAPI, HTTPException
 from fastapi.responses import FileResponse
+from fastapi.middleware.httpsredirect import HTTPSRedirectMiddleware
+
+import uvicorn
 from instaloader import Profile
 
 # Reuse the Instaloader instance from bot.py
 from bot import L, INSTAGRAM_USER, INSTAGRAM_PASSWORD
+from config import SSL_CERTFILE, SSL_KEYFILE
 
 app = FastAPI(title="Telegram InstaBot Web API")
+app.add_middleware(HTTPSRedirectMiddleware)
 
 
 @app.on_event("startup")
@@ -69,3 +75,13 @@ async def download_stories():
         return FileResponse(archive_path, filename="stories_archive.zip")
     except Exception:
         raise HTTPException(status_code=500, detail="Failed to download stories")
+
+
+if __name__ == "__main__":
+    uvicorn.run(
+        "web_app:app",
+        host="0.0.0.0",
+        port=int(os.getenv("PORT", "8000")),
+        ssl_keyfile=SSL_KEYFILE,
+        ssl_certfile=SSL_CERTFILE,
+    )
